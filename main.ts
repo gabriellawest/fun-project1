@@ -4,19 +4,16 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.B, function () {
     little_man.change(LedSpriteProperty.Y, 1)
 })
-let coins: game.LedSprite = null
 let little_man: game.LedSprite = null
 basic.showString("START")
-game.startCountdown(60)
+game.startCountdown(60000)
+little_man = game.createSprite(0, 0)
+let coins = game.createSprite(4, 4)
 basic.forever(function () {
-    little_man = game.createSprite(0, 0)
-    coins = game.createSprite(4, 4)
     if (little_man.isTouching(coins)) {
         game.addScore(1)
+        basic.showIcon(IconNames.Heart)
+        music.playMelody("F G F E G A B C5 ", 307)
         game.gameOver()
-    }
-    if (game.isGameOver()) {
-        basic.showIcon(IconNames.Happy)
-        music.playMelody("G B A G C5 B A B ", 120)
     }
 })
